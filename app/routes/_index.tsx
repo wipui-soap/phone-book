@@ -37,7 +37,7 @@ export default function Index() {
 
   useEffect(() => {
     if(searchText) {
-      setItems(items.filter((item: { id: number; name: string; lastName: string; phone: string }) => 
+      setItems(contacts.filter((item: { id: number; name: string; lastName: string; phone: string }) => 
         item.lastName.toLowerCase().includes(searchText.toLowerCase())));
     } else {
       setItems(contacts);
@@ -49,6 +49,7 @@ export default function Index() {
     data.append("action", "delete");
     data.append("id", contactId.toString());
     submit(data, { method: "post" });
+    setItems(items.filter((i) => i.id !== contactId));
   }
 
   return (
